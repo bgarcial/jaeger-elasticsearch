@@ -1,0 +1,56 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: jaeger-configuration
+  labels:
+    app: jaeger
+    jaeger-infra: configuration
+data:
+  #span-storage-type: cassandra
+  span-storage-type: elasticsearch
+  collector: |
+    collector:
+      # I am adding this
+      # https://github.com/jaegertracing/jaeger-performance/blob/master/openshift/templates/configmap-elasticsearch.yml
+      num-workers: ${COLLECTOR_NUM_WORKERS}
+      queue-size: ${COLLECTOR_QUEUE_SIZE}
+      # End 
+      
+      zipkin:
+        http-port: 9411
+
+    # I am adding this
+    # https://github.com/jaegertracing/jaeger-kubernetes/blob/master/production-elasticsearch/configmap.yml
+    es:
+      server-urls: http://elasticsearch:9200
+      username: elastic 
+      password: changeme
+    # End 
+    
+    # I am commenting this
+    # cassandra:
+      # servers: cassandra
+      # keyspace: jaeger_v1_dc1
+    # End
+
+  query: |
+    # I am adding this
+    query:
+      static-files: ${QUERY_STATIC_FILES}
+      port: 16686
+    es:
+      server-urls: http://elasticsearch:9200
+      bulk:
+        size: ${ES_BULK_SIZE}
+        workers: ${ES_BULK_WORKERS}
+        flush-interval: ${ES_BULK_FLUSH_INTERVAL}
+    # End
+
+    # I am commenting this
+    # cassandra:
+      # servers: cassandra
+      # keyspace: jaeger_v1_dc1
+    # End
+  agent: |
+    collector:
+      host-port: "jaeger-collector:14267"
