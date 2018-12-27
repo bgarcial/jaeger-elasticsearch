@@ -1,0 +1,30 @@
+# https://docs.okd.io/latest/install_config/persistent_storage/persistent_storage_gce.html
+# Como decir a kubernete que su persistent storage sea un  GCE Persistent storage
+
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: my-persistent-jaeger
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 30Gi
+  accessModes:
+    - ReadWriteOnce
+  # hostPath:
+  #  path: "/mnt/data"
+  gcePersistentDisk: 
+    fsType: "ext4" 
+    pdName: "gke-jaeger-persistent--pvc-5b408647-09c9-11e9-bbfc-42010a9a00c0"
+     
+    # este disco debe estar creado, es el quyenysara este volumen persistente 
+    # si se borra el storage persistente se borra el disco
+    #Thgis is the output 
+
+# λ bgarcial [~/workspace/jaeger-elastic] at  master ?
+# → kubectl apply -f pv-volume.yaml                                                                                                                                  [a89fbe2]
+# persistentvolume/my-persistent created
+
+# λ bgarcial [~/workspace/jaeger-elastic] at  master ?

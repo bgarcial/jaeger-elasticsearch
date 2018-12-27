@@ -1,0 +1,22 @@
+# https://cloud.google.com/kubernetes-engine/docs/how-to/volumes
+# Crea un persistent volume claim lo que se empieza en kubernetes 
+ # en storage. Al crearlo se crea un stardard persistent disk en 
+ # la seccion de disks del compute engine 
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: jaeger-disk-test
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 30Gi
+
+# A Persistent volume claim is created on Persistent volume
+# A PersistentVolumeClaim (PVC) is a request for storage by a 
+# user. It is similar to a pod. Pods consume node resources and 
+# PVCs consume PV resources. Pods can request specific levels of 
+# resources (CPU and Memory). Claims can request specific size 
+# and access modes (e.g., can be mounted once read/write or many 
+# times read-only).
