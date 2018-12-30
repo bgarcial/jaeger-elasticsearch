@@ -1,7 +1,9 @@
-# https://cloud.google.com/kubernetes-engine/docs/how-to/volumes
+# https://cloud.google.com/kubernetes-engine/docs/concepts/persistent-volumes
+# https://docs.google.com/document/d/1fmrXxPsbtfq7Arm-6-cdBnf8TgC4gUWnaP4JdfR-wXg/edit# 
+# Great documentation
 # Crea un persistent volume claim lo que se empieza en kubernetes 
- # en storage. Al crearlo se crea un stardard persistent disk en 
- # la seccion de disks del compute engine 
+# en storage. Al crearlo se crea un stardard persistent disk en 
+# la seccion de disks del compute engine 
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -13,10 +15,19 @@ spec:
     requests:
       storage: 30Gi
 
-# A Persistent volume claim is created on Persistent volume
-# A PersistentVolumeClaim (PVC) is a request for storage by a 
-# user. It is similar to a pod. Pods consume node resources and 
-# PVCs consume PV resources. Pods can request specific levels of 
-# resources (CPU and Memory). Claims can request specific size 
-# and access modes (e.g., can be mounted once read/write or many 
-# times read-only).
+# When you create this PersistentVolumeClaim with 
+# kubectl apply -f pvc-demo.yaml, Kubernetes dynamically 
+# creates a corresponding PersistentVolume object. 
+# Assuming that you haven't replaced the GKE default 
+# storage class, this PersistentVolume is backed by a 
+# new, empty Compute Engine persistent disk. 
+# You use this disk in a Pod by using the claim as a volume.
+
+# When you delete this claim, the corresponding PersistentVolume 
+# object as well as the provisioned Compute Engine persistent disk 
+# are also deleted.
+# Should you want to prevent deletion of dynamically provisioned 
+# persistent disks, set the reclaim policy 
+# (https://kubernetes.io/docs/concepts/storage/storage-classes/#reclaim-policy) 
+# of the PersistentVolume resource, or its StorageClass resource, to Retain. 
+# In this case, you are charged for the persistent disk for as long as it exists even if there is no PersistentVolumeClaim consuming it.

@@ -22,9 +22,10 @@ data:
     # I am adding this
     # https://github.com/jaegertracing/jaeger-kubernetes/blob/master/production-elasticsearch/configmap.yml
     es:
-      server-urls: http://elasticsearch:9200
+      server-urls: https://c385ec84452f4376aec843134faf49f2.europe-west1.gcp.cloud.es.io:9243/
       username: elastic 
-      password: changeme
+      password: AicZt4YAxu2VcY1qssNhUgss
+      # Encypt it may be ?
     # End 
     
     # I am commenting this
@@ -39,7 +40,7 @@ data:
       static-files: ${QUERY_STATIC_FILES}
       port: 16686
     es:
-      server-urls: http://elasticsearch:9200
+      server-urls: https://c385ec84452f4376aec843134faf49f2.europe-west1.gcp.cloud.es.io:9243/
       bulk:
         size: ${ES_BULK_SIZE}
         workers: ${ES_BULK_WORKERS}

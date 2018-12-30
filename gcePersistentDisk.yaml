@@ -11,7 +11,14 @@ spec:
       name: test-volume
   volumes:
   - name: test-volume
+    # https://cloud.google.com/kubernetes-engine/docs/concepts/persistent-volumes
+    # Volume implementations such as gcePersistentDisk are configured through 
+    # StorageClass resources. GKE creates a default StorageClass for you which uses 
+    # the standard persistent disk type. The default StorageClass is used when a 
+    # PersistentVolumeClaim doesn't specify a StorageClassName. You can replace the 
+    # provided default StorageClass with your own.
+
     # This GCE PD must already exist.
     gcePersistentDisk:
-      pdName: gke-jaeger-persistent--pvc-6ecfa54c-09d2-11e9-bbfc-42010a9a00c0
+      pdName: gke-jaeger-default-pool-f1cd172d-0wkn
       fsType: ext4
