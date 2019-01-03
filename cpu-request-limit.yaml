@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: elasticsearch-0
+  namespace: default
+spec:
+  containers:
+  - name: elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:5.6.0
+    resources:
+      limits:
+        cpu: "1"
+      requests:
+        cpu: "0.5"
+    args:
+    - -cpus
+    - "2"
+
+
+# To specify a CPU request for a Container, 
+# include the resources:requests field in the 
+# Container resource manifest. To specify a CPU 
+# limit, include resources:limits
+
+# The elasticsearch-0 pod has a container and the 
+# container has a request of 0.5  CPU 
+
+# The args section of the configuration file 
+# provides arguments for the Container when it 
+# starts. 
+
+# The -cpus "2" argument tells the 
+# Container to attempt to use 2 CPUs.
