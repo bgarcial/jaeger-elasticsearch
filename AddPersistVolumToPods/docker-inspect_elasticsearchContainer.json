@@ -1,0 +1,277 @@
+[
+    {
+        "Id": "6e135d695e84cf48d7ffa188711cca18ce5b298083b173167e9688c53c8df813",
+        "Created": "2019-01-06T15:15:11.394164667Z",
+        "Path": "bin/elasticsearch",
+        "Args": [
+            "-Ehttp.host=0.0.0.0",
+            "-Etransport.host=127.0.0.1"
+        ],
+        "State": {
+            "Status": "running",
+            "Running": true,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 2097877,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2019-01-06T15:15:11.543628433Z",
+            "FinishedAt": "0001-01-01T00:00:00Z"
+        },
+        "Image": "sha256:b556c5169ee482360a4e7ad1bf828abd5e67390d68adbd9823bc7e4711104605",
+        "ResolvConfPath": "/var/lib/docker/containers/72eeaa1940414e14a59b748f110b984035ff93f885be051dff21c4e9116ad941/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/72eeaa1940414e14a59b748f110b984035ff93f885be051dff21c4e9116ad941/hostname",
+        "HostsPath": "/var/lib/kubelet/pods/daa75bf6-11c5-11e9-9f30-42010aa60084/etc-hosts",
+        "LogPath": "/var/lib/docker/containers/6e135d695e84cf48d7ffa188711cca18ce5b298083b173167e9688c53c8df813/6e135d695e84cf48d7ffa188711cca18ce5b298083b173167e9688c53c8df813-json.log",
+        "Name": "/k8s_elasticsearch_elasticsearch-0_default_daa75bf6-11c5-11e9-9f30-42010aa60084_0",
+        "RestartCount": 0,
+        "Driver": "overlay2",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "",
+        "ExecIDs": null,
+        "HostConfig": {
+            "Binds": [
+                "/var/lib/kubelet/pods/daa75bf6-11c5-11e9-9f30-42010aa60084/volumes/kubernetes.io~empty-dir/data:/data",
+                "/var/lib/kubelet/pods/daa75bf6-11c5-11e9-9f30-42010aa60084/volumes/kubernetes.io~secret/default-token-96vwj:/var/run/secrets/kubernetes.io/serviceaccount:ro",
+                "/var/lib/kubelet/pods/daa75bf6-11c5-11e9-9f30-42010aa60084/etc-hosts:/etc/hosts",
+                "/var/lib/kubelet/pods/daa75bf6-11c5-11e9-9f30-42010aa60084/containers/elasticsearch/7410ea2d:/dev/termination-log"
+            ],
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "json-file",
+                "Config": {
+                    "max-file": "5",
+                    "max-size": "10m"
+                }
+            },
+            "NetworkMode": "container:72eeaa1940414e14a59b748f110b984035ff93f885be051dff21c4e9116ad941",
+            "PortBindings": null,
+            "RestartPolicy": {
+                "Name": "",
+                "MaximumRetryCount": 0
+            },
+            "AutoRemove": false,
+            "VolumeDriver": "",
+            "VolumesFrom": null,
+            "CapAdd": null,
+            "CapDrop": null,
+            "Dns": null,
+            "DnsOptions": null,
+            "DnsSearch": null,
+            "ExtraHosts": null,
+            "GroupAdd": null,
+            "IpcMode": "container:72eeaa1940414e14a59b748f110b984035ff93f885be051dff21c4e9116ad941",
+            "Cgroup": "",
+            "Links": null,
+            "OomScoreAdj": 999,
+            "PidMode": "",
+            "Privileged": false,
+            "PublishAllPorts": false,
+            "ReadonlyRootfs": false,
+            "SecurityOpt": [
+                "seccomp=unconfined"
+            ],
+            "UTSMode": "",
+            "UsernsMode": "",
+            "ShmSize": 67108864,
+            "Runtime": "runc",
+            "ConsoleSize": [
+                0,
+                0
+            ],
+            "Isolation": "",
+            "CpuShares": 102,
+            "Memory": 0,
+            "NanoCpus": 0,
+            "CgroupParent": "/kubepods/burstable/poddaa75bf6-11c5-11e9-9f30-42010aa60084",
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": null,
+            "BlkioDeviceReadBps": null,
+            "BlkioDeviceWriteBps": null,
+            "BlkioDeviceReadIOps": null,
+            "BlkioDeviceWriteIOps": null,
+            "CpuPeriod": 0,
+            "CpuQuota": 0,
+            "CpuRealtimePeriod": 0,
+            "CpuRealtimeRuntime": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": [],
+            "DiskQuota": 0,
+            "KernelMemory": 0,
+            "MemoryReservation": 0,
+            "MemorySwap": 0,
+            "MemorySwappiness": -1,
+            "OomKillDisable": false,
+            "PidsLimit": 0,
+            "Ulimits": null,
+            "CpuCount": 0,
+            "CpuPercent": 0,
+            "IOMaximumIOps": 0,
+            "IOMaximumBandwidth": 0
+        },
+        "GraphDriver": {
+            "Name": "overlay2",
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/9d7b1f2dc585edb285d990478b0f643743a0482ff5e4ef79301291c5e1543d2d-init/diff:/var/lib/docker/overlay2/551147d8d948d1de80148a43b3eb46cb63a3d45c044166457b58ff5fe0b86fb1/diff:/var/lib/docker/overlay2/a78fbbf28873fc95ea46303a1ce4cfe66a9738e2201fd3bf410583ce9d02dbb9/diff:/var/lib/docker/overlay2/3c94e1bf96982ddcfcb8d5ac8419bbc4bea4615e2e548e47535713c5d67c903e/diff:/var/lib/docker/overlay2/b6eeb9fda1b31f217843b6327473b1d8dd0a4bb00df33a7f22d793926326edc5/diff:/var/lib/docker/overlay2/95e6ebc8d81c1aea211efb1993d3746b84b080d4ad51aa00466aea49ee0a89d2/diff:/var/lib/docker/overlay2/018f24cfeb6604f1ac843685ceeb9f792f39b473319347dab2734cfb36381bc1/diff:/var/lib/docker/overlay2/a2dd6560fdd3c9839bfc1d90f2b762c7447f8cbc10a9d4791cde4d4609f31ee9/diff:/var/lib/docker/overlay2/a2cd05eefb9a68152f437db6bb54bbfd366823845f3e6b5ef60d217a33a84f08/diff:/var/lib/docker/overlay2/64bfc282fbd68e423d6d5b27e79f45db97f87ceac19ab79c2ed89327faba3424/diff:/var/lib/docker/overlay2/e87379d93fe0619a6b574b34158ec7c486e6689528dc3b4e863ba29af283df2b/diff",
+                "MergedDir": "/var/lib/docker/overlay2/9d7b1f2dc585edb285d990478b0f643743a0482ff5e4ef79301291c5e1543d2d/merged",
+                "UpperDir": "/var/lib/docker/overlay2/9d7b1f2dc585edb285d990478b0f643743a0482ff5e4ef79301291c5e1543d2d/diff",
+                "WorkDir": "/var/lib/docker/overlay2/9d7b1f2dc585edb285d990478b0f643743a0482ff5e4ef79301291c5e1543d2d/work"
+            }
+        },
+        "Mounts": [
+            {
+                "Type": "bind",
+                "Source": "/var/lib/kubelet/pods/daa75bf6-11c5-11e9-9f30-42010aa60084/volumes/kubernetes.io~empty-dir/data",
+                "Destination": "/data",
+                "Mode": "",
+                "RW": true,
+                "Propagation": "rprivate"
+            },
+            {
+                "Type": "bind",
+                "Source": "/var/lib/kubelet/pods/daa75bf6-11c5-11e9-9f30-42010aa60084/volumes/kubernetes.io~secret/default-token-96vwj",
+                "Destination": "/var/run/secrets/kubernetes.io/serviceaccount",
+                "Mode": "ro",
+                "RW": false,
+                "Propagation": "rprivate"
+            },
+            {
+                "Type": "bind",
+                "Source": "/var/lib/kubelet/pods/daa75bf6-11c5-11e9-9f30-42010aa60084/etc-hosts",
+                "Destination": "/etc/hosts",
+                "Mode": "",
+                "RW": true,
+                "Propagation": "rprivate"
+            },
+            {
+                "Type": "bind",
+                "Source": "/var/lib/kubelet/pods/daa75bf6-11c5-11e9-9f30-42010aa60084/containers/elasticsearch/7410ea2d",
+                "Destination": "/dev/termination-log",
+                "Mode": "",
+                "RW": true,
+                "Propagation": "rprivate"
+            }
+        ],
+        "Config": {
+            "Hostname": "elasticsearch-0",
+            "Domainname": "",
+            "User": "elasticsearch",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "ExposedPorts": {
+                "9200/tcp": {},
+                "9300/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "KUBERNETES_SERVICE_HOST=10.39.240.1",
+                "JAEGER_QUERY_PORT=tcp://10.39.253.120:80",
+                "JAEGER_COLLECTOR_PORT_14267_TCP=tcp://10.39.242.33:14267",
+                "JAEGER_COLLECTOR_PORT_14267_TCP_ADDR=10.39.242.33",
+                "JAEGER_QUERY_PORT_80_TCP_PROTO=tcp",
+                "JAEGER_QUERY_PORT_80_TCP_ADDR=10.39.253.120",
+                "ZIPKIN_PORT_9411_TCP=tcp://10.39.241.170:9411",
+                "JAEGER_COLLECTOR_PORT=tcp://10.39.242.33:14267",
+                "JAEGER_COLLECTOR_PORT_9411_TCP=tcp://10.39.242.33:9411",
+                "JAEGER_COLLECTOR_PORT_9411_TCP_PROTO=tcp",
+                "JAEGER_COLLECTOR_PORT_14268_TCP_PORT=14268",
+                "JAEGER_COLLECTOR_PORT_9411_TCP_ADDR=10.39.242.33",
+                "KUBERNETES_PORT_443_TCP=tcp://10.39.240.1:443",
+                "JAEGER_COLLECTOR_PORT_9411_TCP_PORT=9411",
+                "ZIPKIN_SERVICE_PORT=9411",
+                "JAEGER_COLLECTOR_PORT_14267_TCP_PROTO=tcp",
+                "JAEGER_COLLECTOR_PORT_14268_TCP=tcp://10.39.242.33:14268",
+                "JAEGER_COLLECTOR_PORT_14268_TCP_ADDR=10.39.242.33",
+                "KUBERNETES_PORT=tcp://10.39.240.1:443",
+                "KUBERNETES_PORT_443_TCP_PORT=443",
+                "JAEGER_QUERY_SERVICE_PORT=80",
+                "JAEGER_QUERY_SERVICE_PORT_JAEGER_QUERY=80",
+                "JAEGER_QUERY_PORT_80_TCP_PORT=80",
+                "JAEGER_COLLECTOR_SERVICE_PORT=14267",
+                "JAEGER_COLLECTOR_PORT_14267_TCP_PORT=14267",
+                "JAEGER_COLLECTOR_PORT_14268_TCP_PROTO=tcp",
+                "ZIPKIN_PORT_9411_TCP_PORT=9411",
+                "ZIPKIN_PORT_9411_TCP_ADDR=10.39.241.170",
+                "KUBERNETES_PORT_443_TCP_PROTO=tcp",
+                "KUBERNETES_PORT_443_TCP_ADDR=10.39.240.1",
+                "JAEGER_QUERY_PORT_80_TCP=tcp://10.39.253.120:80",
+                "ZIPKIN_SERVICE_HOST=10.39.241.170",
+                "ZIPKIN_SERVICE_PORT_JAEGER_COLLECTOR_ZIPKIN=9411",
+                "JAEGER_COLLECTOR_SERVICE_HOST=10.39.242.33",
+                "JAEGER_COLLECTOR_SERVICE_PORT_JAEGER_COLLECTOR_ZIPKIN=9411",
+                "KUBERNETES_SERVICE_PORT_HTTPS=443",
+                "JAEGER_QUERY_SERVICE_HOST=10.39.253.120",
+                "ZIPKIN_PORT=tcp://10.39.241.170:9411",
+                "ZIPKIN_PORT_9411_TCP_PROTO=tcp",
+                "JAEGER_COLLECTOR_SERVICE_PORT_JAEGER_COLLECTOR_TCHANNEL=14267",
+                "JAEGER_COLLECTOR_SERVICE_PORT_JAEGER_COLLECTOR_HTTP=14268",
+                "KUBERNETES_SERVICE_PORT=443",
+                "PATH=/usr/share/elasticsearch/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "ELASTIC_CONTAINER=true",
+                "JAVA_HOME=/usr/lib/jvm/jre-1.8.0-openjdk"
+            ],
+            "Cmd": [
+                "-Ehttp.host=0.0.0.0",
+                "-Etransport.host=127.0.0.1"
+            ],
+            "Healthcheck": {
+                "Test": [
+                    "NONE"
+                ]
+            },
+            "Image": "docker.elastic.co/elasticsearch/elasticsearch@sha256:f95e7d4256197a9bb866b166d9ad37963dc7c5764d6ae6400e551f4987a659d7",
+            "Volumes": null,
+            "WorkingDir": "/usr/share/elasticsearch",
+            "Entrypoint": [
+                "bin/elasticsearch"
+            ],
+            "OnBuild": null,
+            "Labels": {
+                "annotation.io.kubernetes.container.hash": "4bf4eac7",
+                "annotation.io.kubernetes.container.restartCount": "0",
+                "annotation.io.kubernetes.container.terminationMessagePath": "/dev/termination-log",
+                "annotation.io.kubernetes.container.terminationMessagePolicy": "File",
+                "annotation.io.kubernetes.pod.terminationGracePeriod": "30",
+                "build-date": "20170801",
+                "io.kubernetes.container.logpath": "/var/log/pods/daa75bf6-11c5-11e9-9f30-42010aa60084/elasticsearch/0.log",
+                "io.kubernetes.container.name": "elasticsearch",
+                "io.kubernetes.docker.type": "container",
+                "io.kubernetes.pod.name": "elasticsearch-0",
+                "io.kubernetes.pod.namespace": "default",
+                "io.kubernetes.pod.uid": "daa75bf6-11c5-11e9-9f30-42010aa60084",
+                "io.kubernetes.sandbox.id": "72eeaa1940414e14a59b748f110b984035ff93f885be051dff21c4e9116ad941",
+                "license": "GPLv2",
+                "maintainer": "Elastic Docker Team <docker@elastic.co>",
+                "name": "CentOS Base Image",
+                "vendor": "CentOS"
+            }
+        },
+        "NetworkSettings": {
+            "Bridge": "",
+            "SandboxID": "",
+            "HairpinMode": false,
+            "LinkLocalIPv6Address": "",
+            "LinkLocalIPv6PrefixLen": 0,
+            "Ports": null,
+            "SandboxKey": "",
+            "SecondaryIPAddresses": null,
+            "SecondaryIPv6Addresses": null,
+            "EndpointID": "",
+            "Gateway": "",
+            "GlobalIPv6Address": "",
+            "GlobalIPv6PrefixLen": 0,
+            "IPAddress": "",
+            "IPPrefixLen": 0,
+            "IPv6Gateway": "",
+            "MacAddress": "",
+            "Networks": {}
+        }
+    }
+]

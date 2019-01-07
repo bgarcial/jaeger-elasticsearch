@@ -4,11 +4,12 @@
 # Crea un persistent volume claim lo que se empieza en kubernetes 
 # en storage. Al crearlo se crea un stardard persistent disk en 
 # la seccion de disks del compute engine 
-apiVersion: v1
 kind: PersistentVolumeClaim
+apiVersion: v1
 metadata:
-  name: jaeger-disk-test
+  name: my-persistent-jaeger-claim
 spec:
+  storageClassName: manual
   accessModes:
     - ReadWriteOnce
   resources:

@@ -13,13 +13,13 @@ spec:
     storage: 30Gi
   accessModes:
     - ReadWriteOnce
-  # hostPath:
-  #  path: "/mnt/data"
-  gcePersistentDisk: 
-    fsType: "ext4" 
-    pdName: "gke-jaeger-persistent--pvc-5b408647-09c9-11e9-bbfc-42010a9a00c0"
+  hostPath:
+    path: "/mnt/data"
+  #gcePersistentDisk: 
+  #  fsType: "ext4" 
+  #  pdName: "gke-jaeger-persistent-st-default-pool-81004235-h8xt"
      
-    # este disco debe estar creado, es el quyenysara este volumen persistente 
+    # este disco debe estar creado, es el que se encargara este volumen persistente 
     # si se borra el storage persistente se borra el disco
     #Thgis is the output 
 

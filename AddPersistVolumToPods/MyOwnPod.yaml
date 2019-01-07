@@ -1,11 +1,10 @@
 apiVersion: v1
 kind: Pod
-metadata: 
-# start metadata
+metadata:
   annotations:
     kubernetes.io/limit-ranger: 'LimitRanger plugin set: cpu request for container
       elasticsearch'
-  creationTimestamp: 2019-01-04T11:43:10Z
+  creationTimestamp: 2019-01-06T17:16:37Z
   generateName: elasticsearch-
   labels:
     app: jaeger-elasticsearch
@@ -14,41 +13,29 @@ metadata:
     statefulset.kubernetes.io/pod-name: elasticsearch-0
   name: elasticsearch-0
   namespace: default
-  ownerReferences: 
-  # start owner references array
-  - apiVersion: apps/v1 
+  ownerReferences:
+  - apiVersion: apps/v1
     blockOwnerDeletion: true
     controller: true
     kind: StatefulSet
     name: elasticsearch
-    uid: 86578784-0f36-11e9-b8b1-42010aa60019 
-  # end owner references array
-  resourceVersion: "178993"
+    uid: 86578784-0f36-11e9-b8b1-42010aa60019
+  resourceVersion: "535767"
   selfLink: /api/v1/namespaces/default/pods/elasticsearch-0
-  uid: e93b5d47-1015-11e9-b424-42010aa6018b 
-# end metadata
-spec: 
-# start spec
-  containers: 
-  # start containers array 
-  - args: 
-    # start args array
+  uid: d35044ae-11d6-11e9-9f30-42010aa60084
+spec:
+  containers:
+  - args:
     - -Ehttp.host=0.0.0.0
-    - -Etransport.host=127.0.0. 
-    # end args array
-    command: 
-    # start command array
-    - bin/elasticsearch 
-    # end command array
-    image: docker.elastic.co/elasticsearch/elasticsearch:5.6.0 # part of containers array
+    - -Etransport.host=127.0.0.1
+    command:
+    - bin/elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:5.6.0
     imagePullPolicy: Always
-    name: elasticsearch 
-    readinessProbe: 
-    # start readinessProbe 
-      exec: 
-      # start exec
-        command: 
-        # start command array
+    name: elasticsearch
+    readinessProbe:
+      exec:
+        command:
         - curl
         - --fail
         - --silent
@@ -56,37 +43,25 @@ spec:
         - /dev/null
         - --user
         - elastic:changeme
-        - localhost:9200 
-        # end command array
-      # end exec
+        - localhost:9200
       failureThreshold: 3
       initialDelaySeconds: 5
       periodSeconds: 5
       successThreshold: 1
       timeoutSeconds: 4
-    # end readinessProbe
-    resources: 
-    # start resources
+    resources:
       requests:
-      # start requests
         cpu: 100m
-      # end requests
-    # end resources
     terminationMessagePath: /dev/termination-log
     terminationMessagePolicy: File
     volumeMounts:
-    # start volumeMounts array. We have 2 volumeMounts elements data and default-token-96vwj
-    # start mountPath
+    - mountPaht: /jaeger
+      name: my-persistent-jaeger-storage
     - mountPath: /data
       name: data
-    # end mountPath
-    # start mountPath
     - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
       name: default-token-96vwj
       readOnly: true
-    # end mountPath  
-    # end volumeMounts array
-  # end containers array  
   dnsPolicy: ClusterFirst
   hostname: elasticsearch-0
   nodeName: gke-jaeger-persistent-st-default-pool-81004235-h8xt
@@ -97,8 +72,7 @@ spec:
   serviceAccountName: default
   subdomain: elasticsearch
   terminationGracePeriodSeconds: 30
-  tolerations: 
-  # start tolerations array
+  tolerations:
   - effect: NoExecute
     key: node.kubernetes.io/not-ready
     operator: Exists
@@ -107,39 +81,32 @@ spec:
     key: node.kubernetes.io/unreachable
     operator: Exists
     tolerationSeconds: 300
-  # end tolerations array
   volumes:
-  # start volumes array. We have two elements volumes, data and default-token-96vwj
+  - name: my-persistent-jaeger-storage
+    persistentVolumeClaim:
+      claimName: my-persistent-jaeger-claim
   - emptyDir: {}
     name: data
-  - name: default-token-96vwj # tiene un secret
+  - name: default-token-96vwj
     secret:
-    # start secret
       defaultMode: 420
       secretName: default-token-96vwj
-    # end secret
-  # end volumes array
-# end spec
 status:
-# start status
   conditions:
-  # start conditions array, We have tree elements conditions
-  - lastProbeTime: null # start element1 {}
-    lastTransitionTime: 2019-01-04T11:43:10Z
+  - lastProbeTime: null
+    lastTransitionTime: 2019-01-06T17:16:37Z
     status: "True"
-    type: Initialized # end element1 {}
-  - lastProbeTime: null # start2 element {}
-    lastTransitionTime: 2019-01-04T11:43:39Z
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: 2019-01-06T17:17:02Z
     status: "True"
-    type: Ready # end element2 {}
-  - lastProbeTime: null # start element3 {}
-    lastTransitionTime: 2019-01-04T11:43:10Z
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: 2019-01-06T17:16:37Z
     status: "True"
-    type: PodScheduled # end element3 {}
+    type: PodScheduled
   containerStatuses:
-  # start containerStatuses array
-  # start element containerStatuses
-  - containerID: docker://62439c198928ef7a918bcbd4958dbc03f6ad0b56f43adb4b5685e9bc8dbce616
+  - containerID: docker://5382d2e24acdb818d5d042c13ac9104e9d3e6e65d5322570ddb8752f70e8ac5b
     image: docker.elastic.co/elasticsearch/elasticsearch:5.6.0
     imageID: docker-pullable://docker.elastic.co/elasticsearch/elasticsearch@sha256:f95e7d4256197a9bb866b166d9ad37963dc7c5764d6ae6400e551f4987a659d7
     lastState: {}
@@ -148,12 +115,9 @@ status:
     restartCount: 0
     state:
       running:
-        startedAt: 2019-01-04T11:43:13Z
-  # end element containerStatuses
-  # end containerStatuses array      
+        startedAt: 2019-01-06T17:16:41Z
   hostIP: 10.166.0.2
   phase: Running
-  podIP: 10.36.0.15
+  podIP: 10.36.0.65
   qosClass: Burstable
-  startTime: 2019-01-04T11:43:10Z
-# end status 
+  startTime: 2019-01-06T17:16:37Z
