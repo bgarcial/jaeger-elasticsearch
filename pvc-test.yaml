@@ -31,4 +31,5 @@ spec:
 # persistent disks, set the reclaim policy 
 # (https://kubernetes.io/docs/concepts/storage/storage-classes/#reclaim-policy) 
 # of the PersistentVolume resource, or its StorageClass resource, to Retain. 
-# In this case, you are charged for the persistent disk for as long as it exists even if there is no PersistentVolumeClaim consuming it.
+# In this case, you are charged for the persistent disk for as 
+# long as it exists even if there is no PersistentVolumeClaim consuming it.

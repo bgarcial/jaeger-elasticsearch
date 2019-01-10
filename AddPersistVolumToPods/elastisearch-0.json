@@ -1,168 +1,168 @@
 {
-    "apiVersion": "v1",
-    "kind": "Pod",
-    "metadata": {
-      "annotations": {
-        "kubernetes.io/limit-ranger": "LimitRanger plugin set: cpu request for container elasticsearch"
-      },
-      "creationTimestamp": "2019-01-04 11:43:10 UTC",
-      "generateName": "elasticsearch-",
-      "labels": {
-        "app": "jaeger-elasticsearch",
-        "controller-revision-hash": "elasticsearch-8684f69799",
-        "jaeger-infra": "elasticsearch-replica",
-        "statefulset.kubernetes.io/pod-name": "elasticsearch-0"
-      },
-      "name": "elasticsearch-0",
-      "namespace": "default",
-      "ownerReferences": [
-        {
-          "apiVersion": "apps/v1",
-          "blockOwnerDeletion": true,
-          "controller": true,
-          "kind": "StatefulSet",
-          "name": "elasticsearch",
-          "uid": "86578784-0f36-11e9-b8b1-42010aa60019"
-        }
-      ],
-      "resourceVersion": "178993",
-      "selfLink": "/api/v1/namespaces/default/pods/elasticsearch-0",
-      "uid": "e93b5d47-1015-11e9-b424-42010aa6018b"
+  "apiVersion": "v1",
+  "kind": "Pod",
+  "metadata": {
+    "annotations": {
+      "kubernetes.io/limit-ranger": "LimitRanger plugin set: cpu request for container elasticsearch"
     },
-    "spec": {
-      "containers": [
-        {
-          "args": [
-            "-Ehttp.host=0.0.0.0",
-            "-Etransport.host=127.0.0.1"
-          ],
-          "command": [
-            "bin/elasticsearch"
-          ],
-          "image": "docker.elastic.co/elasticsearch/elasticsearch:5.6.0",
-          "imagePullPolicy": "Always",
-          "name": "elasticsearch",
-          "readinessProbe": {
-            "exec": {
-              "command": [
-                "curl",
-                "--fail",
-                "--silent",
-                "--output",
-                "/dev/null",
-                "--user",
-                "elastic:changeme",
-                "localhost:9200"
-              ]
-            },
-            "failureThreshold": 3,
-            "initialDelaySeconds": 5,
-            "periodSeconds": 5,
-            "successThreshold": 1,
-            "timeoutSeconds": 4
+    "creationTimestamp": "2019-01-07 11:34:49 UTC",
+    "generateName": "elasticsearch-",
+    "labels": {
+      "app": "jaeger-elasticsearch",
+      "controller-revision-hash": "elasticsearch-8684f69799",
+      "jaeger-infra": "elasticsearch-replica",
+      "statefulset.kubernetes.io/pod-name": "elasticsearch-0"
+    },
+    "name": "elasticsearch-0",
+    "namespace": "default",
+    "ownerReferences": [
+      {
+        "apiVersion": "apps/v1",
+        "blockOwnerDeletion": true,
+        "controller": true,
+        "kind": "StatefulSet",
+        "name": "elasticsearch",
+        "uid": "8f74a517-126c-11e9-a7a5-42010aa6009d"
+      }
+    ],
+    "resourceVersion": "12227",
+    "selfLink": "/api/v1/namespaces/default/pods/elasticsearch-0",
+    "uid": "3da9c8de-1270-11e9-a7a5-42010aa6009d"
+  },
+  "spec": {
+    "containers": [
+      {
+        "args": [
+          "-Ehttp.host=0.0.0.0",
+          "-Etransport.host=127.0.0.1"
+        ],
+        "command": [
+          "bin/elasticsearch"
+        ],
+        "image": "docker.elastic.co/elasticsearch/elasticsearch:5.6.0",
+        "imagePullPolicy": "Always",
+        "name": "elasticsearch",
+        "readinessProbe": {
+          "exec": {
+            "command": [
+              "curl",
+              "--fail",
+              "--silent",
+              "--output",
+              "/dev/null",
+              "--user",
+              "elastic:changeme",
+              "localhost:9200"
+            ]
           },
-          "resources": {
-            "requests": {
-              "cpu": "100m"
-            }
+          "failureThreshold": 3,
+          "initialDelaySeconds": 5,
+          "periodSeconds": 5,
+          "successThreshold": 1,
+          "timeoutSeconds": 4
+        },
+        "resources": {
+          "requests": {
+            "cpu": "100m"
+          }
+        },
+        "terminationMessagePath": "/dev/termination-log",
+        "terminationMessagePolicy": "File",
+        "volumeMounts": [
+          {
+            "mountPath": "/data",
+            "name": "data"
           },
-          "terminationMessagePath": "/dev/termination-log",
-          "terminationMessagePolicy": "File",
-          "volumeMounts": [
-            {
-              "mountPath": "/data",
-              "name": "data"
-            },
-            {
-              "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
-              "name": "default-token-96vwj",
-              "readOnly": true
-            }
-          ]
-        }
-      ],
-      "dnsPolicy": "ClusterFirst",
-      "hostname": "elasticsearch-0",
-      "nodeName": "gke-jaeger-persistent-st-default-pool-81004235-h8xt",
-      "restartPolicy": "Always",
-      "schedulerName": "default-scheduler",
-      "securityContext": {
+          {
+            "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+            "name": "default-token-zlhhw",
+            "readOnly": true
+          }
+        ]
+      }
+    ],
+    "dnsPolicy": "ClusterFirst",
+    "hostname": "elasticsearch-0",
+    "nodeName": "gke-jaeger-persistent-st-default-pool-35b9d33c-phvx",
+    "restartPolicy": "Always",
+    "schedulerName": "default-scheduler",
+    "securityContext": {
+    },
+    "serviceAccount": "default",
+    "serviceAccountName": "default",
+    "subdomain": "elasticsearch",
+    "terminationGracePeriodSeconds": 30,
+    "tolerations": [
+      {
+        "effect": "NoExecute",
+        "key": "node.kubernetes.io/not-ready",
+        "operator": "Exists",
+        "tolerationSeconds": 300
       },
-      "serviceAccount": "default",
-      "serviceAccountName": "default",
-      "subdomain": "elasticsearch",
-      "terminationGracePeriodSeconds": 30,
-      "tolerations": [
-        {
-          "effect": "NoExecute",
-          "key": "node.kubernetes.io/not-ready",
-          "operator": "Exists",
-          "tolerationSeconds": 300
+      {
+        "effect": "NoExecute",
+        "key": "node.kubernetes.io/unreachable",
+        "operator": "Exists",
+        "tolerationSeconds": 300
+      }
+    ],
+    "volumes": [
+      {
+        "emptyDir": {
         },
-        {
-          "effect": "NoExecute",
-          "key": "node.kubernetes.io/unreachable",
-          "operator": "Exists",
-          "tolerationSeconds": 300
+        "name": "data"
+      },
+      {
+        "name": "default-token-zlhhw",
+        "secret": {
+          "defaultMode": 420,
+          "secretName": "default-token-zlhhw"
         }
-      ],
-      "volumes": [
-        {
-          "emptyDir": {
-          },
-          "name": "data"
+      }
+    ]
+  },
+  "status": {
+    "conditions": [
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2019-01-07 11:34:49 UTC",
+        "status": "True",
+        "type": "Initialized"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2019-01-07 11:35:13 UTC",
+        "status": "True",
+        "type": "Ready"
+      },
+      {
+        "lastProbeTime": null,
+        "lastTransitionTime": "2019-01-07 11:34:49 UTC",
+        "status": "True",
+        "type": "PodScheduled"
+      }
+    ],
+    "containerStatuses": [
+      {
+        "containerID": "docker://b5239d2ca4b6230a66f5ea2c45a8b65df7059dcb72656005e3242e988de9b86b",
+        "image": "docker.elastic.co/elasticsearch/elasticsearch:5.6.0",
+        "imageID": "docker-pullable://docker.elastic.co/elasticsearch/elasticsearch@sha256:f95e7d4256197a9bb866b166d9ad37963dc7c5764d6ae6400e551f4987a659d7",
+        "lastState": {
         },
-        {
-          "name": "default-token-96vwj",
-          "secret": {
-            "defaultMode": 420,
-            "secretName": "default-token-96vwj"
+        "name": "elasticsearch",
+        "ready": true,
+        "restartCount": 0,
+        "state": {
+          "running": {
+            "startedAt": "2019-01-07 11:34:52 UTC"
           }
         }
-      ]
-    },
-    "status": {
-      "conditions": [
-        {
-          "lastProbeTime": null,
-          "lastTransitionTime": "2019-01-04 11:43:10 UTC",
-          "status": "True",
-          "type": "Initialized"
-        },
-        {
-          "lastProbeTime": null,
-          "lastTransitionTime": "2019-01-04 11:43:39 UTC",
-          "status": "True",
-          "type": "Ready"
-        },
-        {
-          "lastProbeTime": null,
-          "lastTransitionTime": "2019-01-04 11:43:10 UTC",
-          "status": "True",
-          "type": "PodScheduled"
-        }
-      ],
-      "containerStatuses": [
-        {
-          "containerID": "docker://62439c198928ef7a918bcbd4958dbc03f6ad0b56f43adb4b5685e9bc8dbce616",
-          "image": "docker.elastic.co/elasticsearch/elasticsearch:5.6.0",
-          "imageID": "docker-pullable://docker.elastic.co/elasticsearch/elasticsearch@sha256:f95e7d4256197a9bb866b166d9ad37963dc7c5764d6ae6400e551f4987a659d7",
-          "lastState": {
-          },
-          "name": "elasticsearch",
-          "ready": true,
-          "restartCount": 0,
-          "state": {
-            "running": {
-              "startedAt": "2019-01-04 11:43:13 UTC"
-            }
-          }
-        }
-      ],
-      "hostIP": "10.166.0.2",
-      "phase": "Running",
-      "podIP": "10.36.0.15",
-      "qosClass": "Burstable",
-      "startTime": "2019-01-04 11:43:10 UTC"
-    }
+      }
+    ],
+    "hostIP": "10.166.0.4",
+    "phase": "Running",
+    "podIP": "10.36.2.12",
+    "qosClass": "Burstable",
+    "startTime": "2019-01-07 11:34:49 UTC"
   }
+}

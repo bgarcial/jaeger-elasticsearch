@@ -1,0 +1,141 @@
+
+Title:
+Configuring a pod to usage a Persistent volume for storage - Jaeger with elasticsearch backend
+
+
+
+I have a kubernetes google engine cluster (KGE), and on it, I have a jaeger service, created through of [this template][1].
+ 
+In addition I have a elasticsearch service created via **stateful specialized pod**  [like this][2], and the respective jaeger configuration script [like this][3]: 
+
+I've created the Statefulset via [jaeger kubernetes oficial][4] `.yml` manifests files and I am using that official guide as a starting point.
+
+In the previous `elasticsearch.yml` file referenced (Stateful specialized elasticsearch pod) I have:
+
+- A headless service object named elasticsearch is created, indicated by the `metadata: name` field.
+ 
+The `Service` targets an app called `jaeger`, indicated by `labels: app: jaeger` and `selector: app: jaeger-elasticsearch`.
+
+The `Service` exposes `9200` and `9300` port and names it `elasticsearch`. This Service control the network domain and to route Internet traffic to the containerized application deployed by the `StatefulSet`. It's a headless service just for elasticsearch server
+
+All the previously mentioned in red square in the below picture.
+
+ - 1 replicated pods
+ - The Pod template (`spec: template`) indicates that its Pods are labelled `app: jaeger-elasticsearch`
+ - The Pod specification (`template: spec`) indicates that the `StatefulSet's` `Pods` run one container, `elasticsearch`, which runs the `elasticsearch:5.6.0`  image. The container image is possibly hosted by docker hub.
+ - `template: spec: volumeMounts` specifies a mountPath, which is named `data`. The `mountPath` is the path within the container at which a storage volume should be mounted.  /data
+
+All the previously mentioned can be founded [here in this script][2]
+
+This elasticsearch service created via `StatefulSet` let me have on my KGE cluster the following components:
+
+A service named `elasticsearch`
+
+    ~ ❯❯❯ kubectl get service elasticsearch
+    NAME            TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)             AGE
+    elasticsearch   ClusterIP   None         <none>        9200/TCP,9300/TCP   4d
+    ~ ❯❯❯ 
+
+ A pod named `elasticsearch-0`, which have the elasticsearch container 
+
+    ~ ❯❯❯ kubectl get pod elasticsearch-0
+    NAME              READY   STATUS    RESTARTS   AGE
+    elasticsearch-0   1/1     Running   0          43m
+    ~ ❯❯❯ 
+
+I've created and storage class called `jaeger-data` with `gce-pd` as the volume provisioner:
+
+    kind: StorageClass
+    apiVersion: storage.k8s.io/v1
+    metadata:
+      name: jaeger-data
+    provisioner: kubernetes.io/gce-pd
+    
+    parameters:
+      type: pd-ssd
+      fsType: ext4
+    reclaimPolicy: Retain
+
+I create the storage class:
+
+    ~ ❯❯❯ kubectl apply -f 1-creatingStorageClass.yaml 
+    storageclass.storage.k8s.io/jaeger-data created
+    ~ ❯❯❯
+
+I've wanted create the `StorageClass` in order to when I going to create a `PVC`, I've  specified that storage class, so, of this way KGE create a `PV` automatically and avoid create it manually.
+
+I am going to define the persistent volume client PVC `jaeger-vol`
+
+    apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
+      name: jaeger-vol
+      namespace: default
+    spec:
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 50Gi
+      storageClassName: jaeger-data
+
+I create the pvc
+
+    ~ ❯❯❯ kubectl apply -f 2-persistentVolumeClaim.yaml 
+    persistentvolumeclaim/jaeger-vol created
+    ~ ❯❯❯
+
+And then my `jaeger-vol` pvc has claimed to their pv respective, which was created automatically, and they are using the same `storageClassName` 
+
+    ~ ❯❯❯ kubectl get pv
+    NAME                                       CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                STORAGECLASS   REASON   AGE
+    pvc-0b55725e-126b-11e9-a7a5-42010aa6009d   50Gi       RWO            Retain           Bound    default/jaeger-vol   jaeger-data             1m
+    
+    ~/w/j/AddPersistVolumToPods ❯❯❯ kubectl get pvc
+    NAME         STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+    jaeger-vol   Bound    pvc-0b55725e-126b-11e9-a7a5-42010aa6009d   50Gi       RWO            jaeger-data    1m
+    ~ ❯❯❯ 
+
+ And then, I want to find the way of **how to associate my `jaeger-vol` pvc** (and the pv which he claims it) **to our elasticsearch service**.
+
+Here, I have some doubts about how to do it, if do it inside my `elasticsearch-0` pod or 
+ inside the `StatefulSet` script ( I've checked that in this script also the different volumes are referenced ...), which I've used to create the elasticsearch service and I've referenced previously.
+
+I've decided try modifying my `elasticsearch-0` pod un order to configure it to usage my persistent volume. I proceed with the following:
+
+I am editing my  `elasticsearch-0` pod `yaml` file from KGE, and initially with respect to the use of volumes, this is the situation: 
+
+[![enter image description here][5]][5]
+
+Currently, the `elasticsearch-0` pod have associated two volumes (`data` and `default-token-zlhhw` ) with their respective mountPath's (`/data` and `/var/run/secrets/kubernetes.io/serviceaccount`)
+
+I've enter to my node which manage my `elastic-search0` pod via `gcloud compute ssh <node-name> --zone=<zone-name>` command and I've enter to the elasticsearch docker container with root privileges `docker exec -it -u root containerID bash` (following these [steps][6]) and I've added a new mountPath named  `/jaeger-data`
+
+    [root@elasticsearch-0 elasticsearch]# mkdir /jaeger-data
+    [root@elasticsearch-0 elasticsearch]# 
+
+
+and I've added the following:
+
+ hablar de que acople eso a los datos en el pod
+yaml de elasticsearch-0 pero que me dio un error.
+
+Hablar de que si lo puedo incluir como todo junto en un StatefulSet como lo tengo 
+en lo que vi ayer y en mi doc
+
+O preguntar si debo asociarle el pvc es al Deployment DE jaeger en si y no al pod d elasticsearch
+
+
+  [1]: https://github.com/jaegertracing/jaeger-kubernetes#jaeger-components
+  [2]: https://raw.githubusercontent.com/jaegertracing/jaeger-kubernetes/master/production-elasticsearch/elasticsearch.yml
+  [3]: https://raw.githubusercontent.com/jaegertracing/jaeger-kubernetes/master/production-elasticsearch/configmap.yml
+  [4]: https://github.com/jaegertracing/jaeger-kubernetes#production-setup
+  [5]: https://i.stack.imgur.com/Eru7q.png
+  [6]: https://stackoverflow.com/questions/42793382/exec-commands-on-kubernetes-pods-with-root-access
+
+  [1]: https://github.com/jaegertracing/jaeger-kubernetes#jaeger-components
+  [2]: https://raw.githubusercontent.com/jaegertracing/jaeger-kubernetes/master/production-elasticsearch/elasticsearch.yml
+  [3]: https://raw.githubusercontent.com/jaegertracing/jaeger-kubernetes/master/production-elasticsearch/configmap.yml
+  [4]: https://github.com/jaegertracing/jaeger-kubernetes#production-setup
+  [5]: https://i.stack.imgur.com/Eru7q.png
+  [6]: https://stackoverflow.com/questions/42793382/exec-commands-on-kubernetes-pods-with-root-access
